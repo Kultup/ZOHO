@@ -35,7 +35,7 @@
 
 ```bash
 git clone <repository-url>
-cd zoho/Zoho\ API
+cd "Zoho API"
 ```
 
 ### 2. Встановлення залежностей
