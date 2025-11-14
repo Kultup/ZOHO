@@ -110,7 +110,7 @@ dotnet run -c Release
 
 **Примітка:** 
 - Для **тестового середовища** використовуйте API ключ: `e27425e5f526464d88f2dda91080fac6`
-- Для **бойового середовища** використовуйте API ключ: `c64e0f8a-ac7`
+- Для **бойового середовища** використовуйте API ключ: `c64e0f8a-ac7` (встановлено в `appsettings.example.json`)
 - Документація Syrve API Cloud: [https://api-eu.syrve.live/](https://api-eu.syrve.live/)
 
 #### Параметри конфігурації:
