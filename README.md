@@ -49,7 +49,11 @@ dotnet restore
 Скопіюйте `appsettings.example.json` в `appsettings.json` та відредагуйте з вашими налаштуваннями:
 
 ```bash
+# Якщо ви в кореневій директорії проекту:
 cp "Zoho API/appsettings.example.json" "Zoho API/appsettings.json"
+
+# Або якщо ви вже в директорії "Zoho API":
+cp appsettings.example.json appsettings.json
 ```
 
 Потім відредагуйте `appsettings.json` (див. розділ [Налаштування](#налаштування))
