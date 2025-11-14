@@ -1,0 +1,73 @@
+## .NET
+bin/
+obj/
+*.user
+*.suo
+*.cache
+*.dll
+*.exe
+*.pdb
+*.deps.json
+*.runtimeconfig.json
+*.staticwebassets.endpoints.json
+
+## Build results
+[Dd]ebug/
+[Rr]elease/
+x64/
+x86/
+[Aa]rm/
+[Aa]rm64/
+bld/
+[Bb]in/
+[Oo]bj/
+[Ll]og/
+[Ll]ogs/
+
+## Visual Studio / Rider
+.vs/
+.idea/
+*.sln.docstates
+*.userosscache
+*.sln.docstates
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+
+## Logs
+logs/
+*.log
+
+## macOS
+__MACOSX/
+.DS_Store
+
+## Test files
+test-*.ps1
+test-*.json
+quick-test.ps1
+execute.json
+
+## Environment files
+.env
+.env.local
+appsettings.Production.json
+appsettings.json
+
+## NuGet
+*.nupkg
+*.snupkg
+project.lock.json
+project.fragment.lock.json
+artifacts/
+
+## Rider
+.idea/
+*.sln.iml
+
+## Temporary files
+*.tmp
+*.temp
+*~
+

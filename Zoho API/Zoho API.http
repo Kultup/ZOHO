@@ -1,0 +1,65 @@
+@Zoho_API_HostAddress = http://localhost:5042
+@ApiKey = YOUR_MICROSERVICE_API_KEY_HERE
+
+### Test 1: Assign Waiter to Reserve
+POST {{Zoho_API_HostAddress}}/api/assign-waiter
+X-API-Key: {{ApiKey}}
+Content-Type: application/json
+
+{
+  "organizationId": "bebb377a-f070-42b0-a68c-28ade4db6e28",
+  "reserveId": "95472c6c-ecbd-49b4-8f7f-afea1eb0360d",
+  "employeeId": "df103a36-9b52-45b9-b911-b8821e5b24d3"
+}
+
+### Test 2: Syrve Webhook Event
+POST {{Zoho_API_HostAddress}}/api/syrve/webhook
+X-API-Key: {{ApiKey}}
+Content-Type: application/json
+
+{
+  "eventType": "ReserveUpdate",
+  "organizationId": "bebb377a-f070-42b0-a68c-28ade4db6e28",
+  "eventInfo": {
+    "id": "95472c6c-ecbd-49b4-8f7f-afea1eb0360d",
+    "reserve": {
+      "id": "95472c6c-ecbd-49b4-8f7f-afea1eb0360d",
+      "employeeId": "df103a36-9b52-45b9-b911-b8821e5b24d3",
+      "organizationId": "bebb377a-f070-42b0-a68c-28ade4db6e28"
+    }
+  }
+}
+
+### Test 3: Assign Waiter - Missing Parameters (should return 400)
+POST {{Zoho_API_HostAddress}}/api/assign-waiter
+X-API-Key: {{ApiKey}}
+Content-Type: application/json
+
+{
+  "organizationId": "",
+  "reserveId": "",
+  "employeeId": ""
+}
+
+### Test 4: Assign Waiter - No API Key (should return 401)
+POST {{Zoho_API_HostAddress}}/api/assign-waiter
+Content-Type: application/json
+
+{
+  "organizationId": "test-org-id",
+  "reserveId": "test-reserve-id",
+  "employeeId": "test-employee-id"
+}
+
+### Test 5: Assign Waiter - Invalid API Key (should return 403)
+POST {{Zoho_API_HostAddress}}/api/assign-waiter
+X-API-Key: invalid-key
+Content-Type: application/json
+
+{
+  "organizationId": "test-org-id",
+  "reserveId": "test-reserve-id",
+  "employeeId": "test-employee-id"
+}
+
+###

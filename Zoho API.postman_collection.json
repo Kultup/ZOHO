@@ -1,0 +1,490 @@
+{
+	"info": {
+		"_postman_id": "zoho-syrve-integration",
+		"name": "Zoho CRM - Syrve Integration API",
+		"description": "Postman колекція для тестування мікросервісу інтеграції Zoho CRM та Syrve Front API",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Assign Waiter",
+			"item": [
+				{
+					"name": "Assign Waiter - Success",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"Response has creationStatus\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData).to.have.property('creationStatus');",
+									"    pm.expect(jsonData).to.have.property('reserveId');",
+									"    pm.expect(jsonData).to.have.property('employeeId');",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "X-API-Key",
+								"value": "{{ApiKey}}",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"organizationId\": \"bebb377a-f070-42b0-a68c-28ade4db6e28\",\n  \"reserveId\": \"95472c6c-ecbd-49b4-8f7f-afea1eb0360d\",\n  \"employeeId\": \"df103a36-9b52-45b9-b911-b8821e5b24d3\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BaseUrl}}/api/assign-waiter",
+							"host": [
+								"{{BaseUrl}}"
+							],
+							"path": [
+								"api",
+								"assign-waiter"
+							]
+						},
+						"description": "Успішне призначення офіціанта до резерву в Syrve"
+					},
+					"response": []
+				},
+				{
+					"name": "Assign Waiter - Validation Error (Empty Fields)",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 400\", function () {",
+									"    pm.response.to.have.status(400);",
+									"});",
+									"",
+									"pm.test(\"Response has error status\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData).to.have.property('status', 'error');",
+									"    pm.expect(jsonData).to.have.property('errorType', 'Validation');",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "X-API-Key",
+								"value": "{{ApiKey}}",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"organizationId\": \"\",\n  \"reserveId\": \"\",\n  \"employeeId\": \"\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BaseUrl}}/api/assign-waiter",
+							"host": [
+								"{{BaseUrl}}"
+							],
+							"path": [
+								"api",
+								"assign-waiter"
+							]
+						},
+						"description": "Тест валідації - порожні поля"
+					},
+					"response": []
+				},
+				{
+					"name": "Assign Waiter - Validation Error (Invalid GUID)",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 400\", function () {",
+									"    pm.response.to.have.status(400);",
+									"});",
+									"",
+									"pm.test(\"Response has validation error\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData).to.have.property('status', 'error');",
+									"    pm.expect(jsonData).to.have.property('errorType', 'Validation');",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "X-API-Key",
+								"value": "{{ApiKey}}",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"organizationId\": \"invalid-guid\",\n  \"reserveId\": \"95472c6c-ecbd-49b4-8f7f-afea1eb0360d\",\n  \"employeeId\": \"df103a36-9b52-45b9-b911-b8821e5b24d3\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BaseUrl}}/api/assign-waiter",
+							"host": [
+								"{{BaseUrl}}"
+							],
+							"path": [
+								"api",
+								"assign-waiter"
+							]
+						},
+						"description": "Тест валідації - невалідний формат GUID"
+					},
+					"response": []
+				},
+				{
+					"name": "Assign Waiter - Missing API Key",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 401\", function () {",
+									"    pm.response.to.have.status(401);",
+									"});",
+									"",
+									"pm.test(\"Response has authentication error\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData).to.have.property('status', 'error');",
+									"    pm.expect(jsonData).to.have.property('errorType', 'Authentication');",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"organizationId\": \"bebb377a-f070-42b0-a68c-28ade4db6e28\",\n  \"reserveId\": \"95472c6c-ecbd-49b4-8f7f-afea1eb0360d\",\n  \"employeeId\": \"df103a36-9b52-45b9-b911-b8821e5b24d3\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BaseUrl}}/api/assign-waiter",
+							"host": [
+								"{{BaseUrl}}"
+							],
+							"path": [
+								"api",
+								"assign-waiter"
+							]
+						},
+						"description": "Тест авторизації - відсутній API ключ"
+					},
+					"response": []
+				},
+				{
+					"name": "Assign Waiter - Invalid API Key",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 403\", function () {",
+									"    pm.response.to.have.status(403);",
+									"});",
+									"",
+									"pm.test(\"Response has authentication error\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData).to.have.property('status', 'error');",
+									"    pm.expect(jsonData).to.have.property('errorType', 'Authentication');",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "X-API-Key",
+								"value": "invalid-key",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"organizationId\": \"bebb377a-f070-42b0-a68c-28ade4db6e28\",\n  \"reserveId\": \"95472c6c-ecbd-49b4-8f7f-afea1eb0360d\",\n  \"employeeId\": \"df103a36-9b52-45b9-b911-b8821e5b24d3\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BaseUrl}}/api/assign-waiter",
+							"host": [
+								"{{BaseUrl}}"
+							],
+							"path": [
+								"api",
+								"assign-waiter"
+							]
+						},
+						"description": "Тест авторизації - невірний API ключ"
+					},
+					"response": []
+				}
+			],
+			"description": "Endpoints для призначення офіціанта до резерву/замовлення"
+		},
+		{
+			"name": "Syrve Webhook",
+			"item": [
+				{
+					"name": "Webhook - ReserveUpdate",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"Response has success status\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData).to.have.property('status', 'success');",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "X-API-Key",
+								"value": "{{ApiKey}}",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"eventType\": \"ReserveUpdate\",\n  \"organizationId\": \"bebb377a-f070-42b0-a68c-28ade4db6e28\",\n  \"eventInfo\": {\n    \"id\": \"95472c6c-ecbd-49b4-8f7f-afea1eb0360d\",\n    \"reserve\": {\n      \"id\": \"95472c6c-ecbd-49b4-8f7f-afea1eb0360d\",\n      \"employeeId\": \"df103a36-9b52-45b9-b911-b8821e5b24d3\",\n      \"organizationId\": \"bebb377a-f070-42b0-a68c-28ade4db6e28\"\n    }\n  }\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BaseUrl}}/api/syrve/webhook",
+							"host": [
+								"{{BaseUrl}}"
+							],
+							"path": [
+								"api",
+								"syrve",
+								"webhook"
+							]
+						},
+						"description": "Webhook подія оновлення резерву з Syrve"
+					},
+					"response": []
+				},
+				{
+					"name": "Webhook - OrderUpdate",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"Response has success status\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData).to.have.property('status', 'success');",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "X-API-Key",
+								"value": "{{ApiKey}}",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"eventType\": \"OrderUpdate\",\n  \"organizationId\": \"bebb377a-f070-42b0-a68c-28ade4db6e28\",\n  \"eventInfo\": {\n    \"id\": \"95472c6c-ecbd-49b4-8f7f-afea1eb0360d\",\n    \"order\": {\n      \"id\": \"95472c6c-ecbd-49b4-8f7f-afea1eb0360d\",\n      \"employeeId\": \"df103a36-9b52-45b9-b911-b8821e5b24d3\",\n      \"organizationId\": \"bebb377a-f070-42b0-a68c-28ade4db6e28\"\n    }\n  }\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BaseUrl}}/api/syrve/webhook",
+							"host": [
+								"{{BaseUrl}}"
+							],
+							"path": [
+								"api",
+								"syrve",
+								"webhook"
+							]
+						},
+						"description": "Webhook подія оновлення замовлення з Syrve"
+					},
+					"response": []
+				},
+				{
+					"name": "Webhook - ReserveCreate",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "X-API-Key",
+								"value": "{{ApiKey}}",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"eventType\": \"ReserveCreate\",\n  \"organizationId\": \"bebb377a-f070-42b0-a68c-28ade4db6e28\",\n  \"eventInfo\": {\n    \"id\": \"95472c6c-ecbd-49b4-8f7f-afea1eb0360d\",\n    \"reserve\": {\n      \"id\": \"95472c6c-ecbd-49b4-8f7f-afea1eb0360d\",\n      \"employeeId\": \"df103a36-9b52-45b9-b911-b8821e5b24d3\",\n      \"organizationId\": \"bebb377a-f070-42b0-a68c-28ade4db6e28\"\n    }\n  }\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BaseUrl}}/api/syrve/webhook",
+							"host": [
+								"{{BaseUrl}}"
+							],
+							"path": [
+								"api",
+								"syrve",
+								"webhook"
+							]
+						},
+						"description": "Webhook подія створення резерву з Syrve"
+					},
+					"response": []
+				}
+			],
+			"description": "Endpoints для обробки webhook подій з Syrve Front API"
+		}
+	],
+	"variable": [
+		{
+			"key": "BaseUrl",
+			"value": "http://localhost:5042",
+			"type": "string"
+		},
+		{
+			"key": "ApiKey",
+			"value": "YOUR_MICROSERVICE_API_KEY_HERE",
+			"type": "string"
+		}
+	]
+}
+

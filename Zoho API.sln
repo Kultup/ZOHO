@@ -1,0 +1,16 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Zoho API", "Zoho API\Zoho API.csproj", "{4BDBFB11-5789-4C2C-92B6-3BD3D87E81CD}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{4BDBFB11-5789-4C2C-92B6-3BD3D87E81CD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4BDBFB11-5789-4C2C-92B6-3BD3D87E81CD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4BDBFB11-5789-4C2C-92B6-3BD3D87E81CD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4BDBFB11-5789-4C2C-92B6-3BD3D87E81CD}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
